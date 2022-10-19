@@ -7,5 +7,5 @@ from django.contrib.postgres.fields import ArrayField
 
 class Artist(models.Model):
     stage_name = models.CharField(max_length=255,unique=True)
-    social_link = models.URLField(max_length=255,default = "\\")
-
+    social_link = models.URLField(max_length=255,default = "")
+    approved_albums = models.IntegerField(default = 0)
