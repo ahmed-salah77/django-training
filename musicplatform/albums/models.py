@@ -9,7 +9,6 @@ class Album(models.Model):
    release_datetime =  models.DateTimeField()
    cost = models.FloatField()
    is_approved = models.BooleanField(default = False,help_text = "Approve the album if its name is not explicit")
-   def Album(self):
-      artist = self.artist;   
-      artist.approved_albums+=1
-      artist.save()
+   def __str__(self):
+      return self.name
+      
