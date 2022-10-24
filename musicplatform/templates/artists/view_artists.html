@@ -1,0 +1,23 @@
+Artists
+
+{%for artist in artists%}
+    <h3 style="color: red;">Artist:</h3>
+    <div style="padding-left: 20px;">
+        <h4 >id: {{artist.id}}</h4>
+        <h4>Name: {{artist.stage_name}}</h4>
+        <h4>Social: {{artist.social_link}}</h4>
+        <h4>Albums:</h4>
+        <div style="padding-left: 20px;">
+            {%for album in albums %}
+                {%if album.artist == artist%}
+                    <h4 >id: {{album.id}}</h4>
+                    <h4>Name: {{album.name}}</h4>
+                    <h4>Creation Time: {{album.created_at}}</h4>
+                    <h4>Release datetime: {{album.release_datetime}}</h4>
+                    <h4>Cost: {{album.cost}}</h4>
+                    <div style=" border-bottom: 1px solid black;"></div>
+                {%endif%}
+            {%endfor%}
+        </div>
+    </div>
+{%endfor%}

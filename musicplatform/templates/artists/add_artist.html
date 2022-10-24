@@ -1,0 +1,13 @@
+<h3>Add Artist</h3>
+<hr>
+
+<form action="" method="post">
+    {% csrf_token %}
+    {% if form.errors %}
+        {% for error in form.stage_name.errors %}
+            <p style="color:red">{{ error }}</p>
+        {% endfor %}
+    {% endif %}
+    {{form.as_p}}
+    <input type="submit">
+</form> 
