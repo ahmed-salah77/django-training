@@ -1,0 +1,20 @@
+<div style="display: flex;align-items:center;flex-direction: column;">
+
+    <h3>Log in</h3>
+    <hr>
+    <form action="" method="post" style="display: flex;flex-direction: column;">
+        {% csrf_token %}
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <p   style="color: red;" {%if message.tags %} class=" {{ message.tags }} " {% endif %}> {{ message }} </p>
+            {% endfor %}
+            </ul>
+        {% endif %}
+        <label>Username</label>
+        <input type="text" name="username">        
+        <label>Password</label>
+        <input type="password" name="password">
+        <input type="submit">
+    </form> 
+    </div>
