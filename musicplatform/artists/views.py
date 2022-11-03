@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
+
+from django.views.decorators.csrf import csrf_exempt
 from .serializers import ArtistSerializer
 from .forms import ArtistForm
 from .models import Artist

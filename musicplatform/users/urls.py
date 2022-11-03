@@ -1,5 +1,6 @@
-from django.urls import path,include
-from . import views
+from django.urls import path
+from .views import get_user, UserProfileGenerics
 urlpatterns = [
-    path('login',views.LoginView.login,name='login'),
+    # path('<int:pk>/',get_user),
+    path('<int:pk>/', UserProfileGenerics.as_view()),
 ]

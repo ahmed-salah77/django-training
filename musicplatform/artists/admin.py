@@ -2,7 +2,6 @@ from xml.etree.ElementInclude import include
 from django.contrib import admin
 from django import forms
 from .models import Artist
-from albums.models import Album
 # Register your models here.
 
 class ArtistForm(forms.ModelForm):
