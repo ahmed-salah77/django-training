@@ -1,0 +1,23 @@
+<div style="display: flex;align-items:center;flex-direction: column;">
+<h3>Add Artist</h3>
+<hr>
+
+<form action="" method="post">
+
+    {% csrf_token %}
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <p   style="color: green;" {%if message.tags %} class=" {{ message.tags }} " {% endif %}> {{ message }} </p>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    {% if form.errors %}
+        {% for error in form.stage_name.errors %}
+            <p style="color:red">{{ error }}</p>
+        {% endfor %}
+    {% endif %}
+    {{form.as_p}}
+    <input type="submit">
+</form> 
+</div>

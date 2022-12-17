@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -25,12 +25,14 @@ SECRET_KEY = 'django-insecure-%cox=co6d5(^ju@em+u!)=(j0*)fmwq7e6hw(gw)vab^4n9wpf
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'rest_framework',
+    'users',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -38,7 +40,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'artists',
-    'albums',    
+    'albums',     
+    'knox',
+    'authentication',
+    
 ]
 
 MIDDLEWARE = [
@@ -52,11 +57,13 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'musicplatform.urls'
+BASE_DIR = Path(__file__).resolve().parent.parent
+
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -69,6 +76,13 @@ TEMPLATES = [
     },
 ]
 
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_AUTHENTICATION_CLASSES': ('knox.auth.TokenAuthentication',),    
+    'TEST_REQUEST_DEFAULT_FORMAT': 'json',
+
+}
 WSGI_APPLICATION = 'musicplatform.wsgi.application'
 
 
