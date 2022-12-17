@@ -7,8 +7,11 @@ class Album(models.Model):
    release_datetime =  models.DateTimeField()
    cost = models.FloatField()
    is_approved = models.BooleanField(default = False,help_text = "Approve the album if its name is not explicit")
+   
    def __str__(self):
       return self.name
+
+
 class Song(models.Model):
    album = models.ForeignKey(Album, on_delete=models.CASCADE,related_name = 'songs')
    name = models.CharField(max_length = 255,default = album.name)

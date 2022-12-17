@@ -19,8 +19,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
         fields = ('user', 'bio')
     def update(self, instance, validated_data):
         user_data = validated_data.pop('user')
-        pkk = self.context.get('view').kwargs['pk']
-        user = User.objects.get(pk = pkk)
+        user = instance.user
         if 'email' in user_data:
             user.email = user_data['email']
         if 'username' in user_data:

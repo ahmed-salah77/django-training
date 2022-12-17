@@ -1,8 +1,8 @@
-from django.urls import path
-from . import views
+from django.contrib import admin
+from django.urls import path, include
+from .views import ArtistCreate, ArtistView
 
 urlpatterns = [
-    path('', views.ArtistView.artists_list,name='artists'),
-    #path('', views.ArtistView.view_artists,name='artists'),
-    path('create', views.ArtistView.add_artist,name='add_artist'),
+    path('', ArtistView.as_view()),
+    path('create/', ArtistCreate.as_view(),name='add_artist'),
 ]

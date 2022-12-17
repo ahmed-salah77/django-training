@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-%cox=co6d5(^ju@em+u!)=(j0*)fmwq7e6hw(gw)vab^4n9wpf
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'artists',
     'albums',     
     'knox',
-
+    'authentication',
+    
 ]
 
 MIDDLEWARE = [
@@ -78,7 +79,8 @@ TEMPLATES = [
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
-    'DEFAULT_AUTHENTICATION_CLASSES': ('knox.auth.TokenAuthentication',),
+    'DEFAULT_AUTHENTICATION_CLASSES': ('knox.auth.TokenAuthentication',),    
+    'TEST_REQUEST_DEFAULT_FORMAT': 'json',
 
 }
 WSGI_APPLICATION = 'musicplatform.wsgi.application'

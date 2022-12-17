@@ -1,17 +1,23 @@
+from dataclasses import field
+from pyexpat import model
+import re
+from xml.dom import ValidationErr
+from albums.serializers import AlbumSerializer
 from rest_framework import serializers
 from .models import Artist
+from django.core.exceptions import ValidationError
 
 
-class ArtistSerializer(serializers.Serializer):
-    id = serializers.IntegerField(read_only=True)
-    stage_name = serializers.CharField(max_length=255)
-    social_link = serializers.URLField(max_length=255)
-
-    def create(self, validated_data):
-        return Artist.objects.create(**validated_data)
-
-    def update(self, instance, validated_data):
-        instance.stage_name = validated_data.get('stage_name', instance.stage_name)
-        instance.social_link = validated_data.get('social_link', instance.social_link)
-        instance.save()
-        return instance
+class ArtistSerializerCreation(serializers.ModelSerializer):
+    class Meta:
+        model = Artist
+        fields = ['stage_name', 'social_link']
+    def validate(self, attrs):
+        if Artist.objects.filter(stage_name = attrs['stage_name']).exists():
+            raise ValidationError("This artist name already exists")
+        return super().validate(attrs)
+class ArtistSerializerView(serializers.ModelSerializer):
+    albums = AlbumSerializer(many = True)
+    class Meta:
+        model = Artist
+        fields = ['stage_name', 'social_link', 'albums']
